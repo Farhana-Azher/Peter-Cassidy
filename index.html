@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Peter Cassidy Profile</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0A0A0F;
+    --surface:#111118;
+    --card:#16161F;
+    --border:#22222E;
+    --border-glow:#2E2E45;
+    --accent:#4ECDC4;
+    --text:#FFFFFF;
+    --muted:#C8C8D8;
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{background:var(--bg);color:var(--text);font-family:'Outfit',sans-serif;font-weight:300;overflow-x:hidden;}
+  h1,h2,h3{font-family:'Playfair Display',serif;font-weight:600;}
+  a{color:inherit;text-decoration:none;}
+  .noise{position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.035;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");}
+  .container{max-width:1200px;margin:0 auto;padding:0 40px;}
+
+  nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,15,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--border);}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;padding:16px 40px;max-width:1200px;margin:0 auto;}
+  .nav-brand{display:flex;align-items:center;gap:18px;}
+  .tt-logo-link{display:flex;align-items:center;padding-right:18px;border-right:1px solid var(--border-glow);}
+  .tt-logo{height:38px;width:auto;display:block;opacity:1;transition:opacity .2s;}
+  .tt-logo-link:hover .tt-logo{opacity:.85;}
+  .nav-name{font-family:'Playfair Display',serif;font-size:1.1rem;letter-spacing:.5px;}
+  .nav-links{display:flex;gap:36px;font-size:.85rem;letter-spacing:.5px;text-transform:uppercase;}
+  .nav-links a{opacity:.75;transition:opacity .2s, color .2s;}
+  .nav-links a:hover, .nav-links a.active{opacity:1;color:var(--accent);}
+  .nav-hamburger{display:none;flex-direction:column;gap:5px;background:none;border:none;cursor:pointer;z-index:200;}
+  .nav-hamburger span{width:24px;height:2px;background:var(--text);display:block;}
+  .mobile-drawer{position:fixed;inset:0;background:#0A0A0Ff2;backdrop-filter:blur(14px);z-index:150;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:34px;transform:translateY(-100%);transition:transform .35s ease;}
+  .mobile-drawer.open{transform:translateY(0);}
+  .mobile-drawer a{font-size:1.4rem;font-family:'Playfair Display',serif;}
+  .drawer-close{position:absolute;top:26px;right:30px;font-size:1.8rem;background:none;border:none;color:var(--text);cursor:pointer;}
+
+  .hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:140px 40px 80px;max-width:1200px;margin:0 auto;position:relative;z-index:2;}
+  .hero-eyebrow{display:flex;gap:14px;flex-wrap:wrap;font-size:.85rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--accent);margin-bottom:24px;}
+  .hero-eyebrow span:not(:last-child)::after{content:"·";color:var(--muted);margin-left:14px;}
+  .hero h1{font-size:3.1rem;line-height:1.15;max-width:840px;margin-bottom:26px;}
+  .hero-summary{font-size:1.15rem;line-height:1.7;color:var(--muted);max-width:660px;margin-bottom:40px;font-weight:300;}
+  .hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px;}
+  .tag{padding:8px 16px;border:1px solid var(--border-glow);border-radius:100px;font-size:.82rem;color:var(--muted);background:var(--surface);}
+  .tag.highlight{border-color:var(--accent);color:var(--accent);}
+  .cta-row{display:flex;align-items:center;gap:24px;flex-wrap:wrap;margin-bottom:20px;}
+  .cta-secondary{font-size:.9rem;color:var(--muted);border-bottom:1px solid var(--border-glow);padding-bottom:2px;}
+  .scroll-hint{position:absolute;bottom:20px;left:40px;font-size:.75rem;letter-spacing:1px;color:var(--muted);text-transform:uppercase;}
+
+  .divider{height:1px;background:linear-gradient(90deg,transparent,var(--border-glow),transparent);margin:0 auto;max-width:1200px;}
+
+  section{padding:110px 0;position:relative;z-index:2;}
+  .why-section-tight{padding-bottom:40px;}
+  .stats-section{padding:70px 0;}
+  .section-label{font-size:.8rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent);margin-bottom:14px;}
+  .section-title{font-size:2.1rem;max-width:680px;margin-bottom:20px;}
+  .section-sub{color:var(--muted);max-width:640px;line-height:1.7;margin-bottom:60px;}
+
+  .metrics-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .metric-cell{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:30px 20px;text-align:center;transition:border-color .25s, transform .25s;}
+  .metric-cell:hover{border-color:var(--border-glow);transform:translateY(-4px);}
+  .metric-cell .metric-num{font-family:'Playfair Display',serif;font-size:2rem;color:var(--accent);display:block;margin-bottom:8px;}
+  .metric-cell .metric-label{font-size:.82rem;color:var(--muted);line-height:1.5;}
+
+  .skills-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;}
+  .skill-cell{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:30px 24px;transition:border-color .25s, transform .25s;}
+  .skill-cell:hover{border-color:var(--border-glow);transform:translateY(-4px);}
+  .skill-icon{font-size:1.8rem;margin-bottom:16px;display:block;}
+  .skill-cell h3{font-family:'Outfit',sans-serif;font-weight:600;font-size:1.02rem;margin-bottom:10px;color:var(--text);}
+  .skill-cell p{font-size:.87rem;color:var(--muted);line-height:1.6;}
+
+  .why-grid{display:grid;grid-template-columns:1fr 1fr;gap:22px;}
+  .why-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:34px;}
+  .why-card .num{color:var(--accent);font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:14px;display:block;}
+  .why-card h3{font-size:1.1rem;margin-bottom:12px;color:var(--text);}
+  .why-card p{color:var(--muted);font-size:.92rem;line-height:1.7;}
+
+  .tool-case{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden;margin-bottom:36px;}
+  .tool-header{padding:34px 40px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:flex-start;flex-wrap:wrap;gap:18px;}
+  .tool-header-left{display:flex;gap:20px;align-items:center;}
+  .tool-num{font-family:'Playfair Display',serif;color:var(--accent);font-size:1.6rem;}
+  .tool-header h3{font-size:1.4rem;color:var(--text);margin-bottom:6px;}
+  .tool-header .tagline{color:var(--muted);font-size:.92rem;}
+  .badges{display:flex;gap:8px;flex-wrap:wrap;}
+  .badge{padding:6px 14px;border:1px solid var(--border-glow);border-radius:100px;font-size:.75rem;color:var(--accent);}
+  .tool-body{padding:30px 40px;}
+  .col-list{list-style:none;}
+  .col-list li{font-size:.92rem;color:var(--muted);line-height:1.7;margin-bottom:12px;padding-left:20px;position:relative;}
+  .col-list li::before{content:"→";position:absolute;left:0;color:var(--accent);}
+  .relevance-note{margin-top:20px;padding-top:20px;border-top:1px solid var(--border);font-size:.85rem;color:var(--muted);}
+  .relevance-note strong{color:var(--accent);font-weight:500;}
+
+  .logo-ticker-section{padding:70px 0;}
+  .logo-ticker-section .section-label{margin-bottom:36px;}
+  .ticker-wrap{width:100%;overflow:hidden;position:relative;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);}
+  .ticker-track{display:flex;align-items:center;gap:64px;width:max-content;animation:tickerScroll 44s linear infinite;}
+  .ticker-wrap:hover .ticker-track{animation-play-state:paused;}
+  .ticker-item{display:flex;align-items:center;justify-content:center;height:56px;min-width:120px;opacity:1;}
+  .ticker-item img{max-height:40px;max-width:150px;object-fit:contain;}
+  .ticker-item.logo-card{background:#fff;border-radius:8px;padding:8px 14px;height:auto;min-width:0;width:fit-content;opacity:1;}
+  .ticker-item.logo-card img{max-height:44px;max-width:140px;}
+  .ticker-fallback{display:none;font-family:'Playfair Display',serif;font-size:1.15rem;color:var(--muted);white-space:nowrap;letter-spacing:.5px;}
+  @keyframes tickerScroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+
+  footer{padding:60px 0;border-top:1px solid var(--border);text-align:center;}
+  footer .f-name{font-family:'Playfair Display',serif;font-size:1.3rem;margin-bottom:14px;}
+  footer .f-links{display:flex;justify-content:center;gap:24px;font-size:.85rem;color:var(--muted);margin-bottom:16px;}
+  footer .f-links a:hover{color:var(--accent);}
+  footer .copyright{font-size:.78rem;color:#5a5a68;}
+  .footer-tt-link{color:#5a5a68;text-decoration:underline;text-underline-offset:2px;transition:color .2s;}
+  .footer-tt-link:hover{color:var(--accent);}
+
+  .back-to-top{position:fixed;bottom:30px;right:30px;width:46px;height:46px;border-radius:50%;background:var(--accent);color:#0A0A0F;display:flex;align-items:center;justify-content:center;font-size:1.1rem;border:none;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .3s, transform .3s;z-index:90;}
+  .back-to-top.show{opacity:1;pointer-events:auto;}
+  .back-to-top:hover{transform:translateY(-3px);}
+
+  .reveal{opacity:0;transform:translateY(24px);transition:opacity .7s ease, transform .7s ease;}
+  .reveal.visible{opacity:1;transform:translateY(0);}
+
+  @media (max-width:1024px){.metrics-grid{grid-template-columns:repeat(2,1fr);}.skills-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:768px){
+    .container{padding:0 24px;}
+    .nav-links{display:none;}
+    .nav-hamburger{display:flex;}
+    .nav-name{font-size:.9rem;}
+    .tt-logo{height:28px;}
+    .tt-logo-link{padding-right:12px;}
+    .nav-brand{gap:12px;}
+    .hero{padding:120px 24px 60px;}
+    .hero h1{font-size:2.1rem;}
+    .why-grid{grid-template-columns:1fr;}
+    .metrics-grid{grid-template-columns:repeat(2,1fr);}
+    .skills-grid{grid-template-columns:1fr;}
+    section{padding:70px 0;}
+    .tool-header{padding:26px 24px;}
+    .tool-body{padding:24px;}
+  }
+  @media (max-width:380px){.hero h1{font-size:1.8rem;}}
+</style>
+</head>
+<body>
+<div class="noise"></div>
+
+<nav>
+  <div class="nav-inner">
+    <div class="nav-brand">
+      <a href="https://www.transformtogether.co.uk/" target="_blank" rel="noopener" class="tt-logo-link">
+        <img src="LOGO_TT.png" alt="Transform Together" class="tt-logo">
+      </a>
+      <a href="https://www.linkedin.com/in/peterjcassidy/" target="_blank" rel="noopener" class="nav-name">Peter Cassidy</a>
+    </div>
+    <div class="nav-links">
+      <a href="#match">Requirement Match</a>
+      <a href="#experience">Experience</a>
+      <a href="#why">Why Peter</a>
+    </div>
+    <button class="nav-hamburger" id="hamburgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <button class="drawer-close" id="drawerClose">✕</button>
+  <a href="#match">Requirement Match</a>
+  <a href="#experience">Experience</a>
+  <a href="#why">Why Peter</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eyebrow">
+    <span>Project Manager</span>
+    <span>Finance & Regulatory Delivery</span>
+    <span>Life & Pensions</span>
+  </div>
+  <h1>Hands-on delivery leadership across Finance regulatory programmes, with direct Standard Life and Phoenix Group experience.</h1>
+  <p class="hero-summary">Peter is a PRINCE2-qualified Project Manager with an extensive track record delivering Finance and regulatory change across Financial Services, Banking and Insurance. His experience spans five years across ReAssure and Phoenix Group, including direct delivery on Standard Life funds, regulatory pensions programmes and FCA compliance initiatives, giving him genuine familiarity with the Standard Life and Phoenix operating environment.</p>
+  <div class="hero-tags">
+    <span class="tag highlight">Standard Life & Phoenix Group Experience</span>
+    <span class="tag highlight">FCA & TPR Regulatory Delivery</span>
+    <span class="tag highlight">Programme Mobilisation & Planning</span>
+    <span class="tag highlight">Life & Pensions</span>
+    <span class="tag">PRINCE2 Practitioner / MSP</span>
+    <span class="tag">Agile & Waterfall</span>
+    <span class="tag">Senior Stakeholder Management</span>
+  </div>
+  <div class="cta-row">
+    <a href="https://www.linkedin.com/in/peterjcassidy/" target="_blank" rel="noopener" class="cta-secondary">View LinkedIn Profile</a>
+  </div>
+  <div class="scroll-hint">Scroll ↓</div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- METRICS -->
+<section class="stats-section">
+  <div class="container">
+    <div class="metrics-grid">
+      <div class="metric-cell reveal"><span class="metric-num">£140bn</span><span class="metric-label">Standard Life funds under migration</span></div>
+      <div class="metric-cell reveal"><span class="metric-num">5+ Years</span><span class="metric-label">Continuous delivery at ReAssure & Phoenix Group</span></div>
+      <div class="metric-cell reveal"><span class="metric-num">10</span><span class="metric-label">Contract renewals at ReAssure, reflecting sustained delivery confidence</span></div>
+      <div class="metric-cell reveal"><span class="metric-num">FCA / TPR</span><span class="metric-label">Regulatory programmes delivered</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- REQUIREMENT MATCH -->
+<section id="match">
+  <div class="container">
+    <div class="section-label reveal">Requirement Match</div>
+    <h2 class="section-title reveal">Directly mapped to the Finance regulatory requirement</h2>
+    <p class="section-sub reveal">Four areas drawn from Peter's own delivery record, each mapped to the core requirements of a Finance regulatory Project Manager working across IFRS 18 and Sustainability Reporting mobilisation.</p>
+    <div class="skills-grid">
+      <div class="skill-cell reveal"><span class="skill-icon">📊</span><h3>Finance & Regulatory Change</h3><p>Multiple FCA and TPR regulatory programmes delivered across Life & Pensions, including Pensions Dashboard, Pensions Flexibility reforms and Legacy Review.</p></div>
+      <div class="skill-cell reveal"><span class="skill-icon">🗺️</span><h3>Mobilisation & Planning</h3><p>End-to-end delivery of the Standard Life actuarial systems migration and multiple regulatory programmes from early planning through to implementation.</p></div>
+      <div class="skill-cell reveal"><span class="skill-icon">💷</span><h3>Budget & Resourcing</h3><p>Owned project budgets, resourcing and third-party supplier management, including a £2m+ programme budget and multi-year outsource provider coordination.</p></div>
+      <div class="skill-cell reveal"><span class="skill-icon">🤝</span><h3>Stakeholder Leadership</h3><p>Reported directly to senior Phoenix executives and Board Committees, and coordinated Actuarial, Risk, Technology and outsource service provider stakeholders throughout delivery.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- WHY THIS CANDIDATE -->
+<section id="why" class="why-section-tight">
+  <div class="container">
+    <div class="section-label reveal">Why This Candidate</div>
+    <h2 class="section-title reveal">Why Peter fits this Finance regulatory requirement</h2>
+    <div class="why-grid">
+      <div class="why-card reveal"><h3>Direct Standard Life and Phoenix Group experience</h3><p>Peter led the actuarial systems migration of Standard Life With Profit and Non Profit funds, totalling £140bn under administration, onto Phoenix actuarial systems, working directly with senior Phoenix executives and Board Committees. This gives him genuine, first-hand familiarity with the Standard Life and Phoenix operating environment.</p></div>
+      <div class="why-card reveal"><h3>Sustained Finance regulatory delivery</h3><p>Across five years at ReAssure and Phoenix Group, Peter delivered the Pensions Dashboard regulatory programme, an actuarial pricing methodology update, and the FCA-driven Legacy Review and Pensions Flexibility programmes, each requiring close coordination with Finance, Actuarial and Risk stakeholders.</p></div>
+      <div class="why-card reveal"><h3>Hands-on mobilisation and planning</h3><p>Peter has repeatedly taken early-stage regulatory requirements and built them into structured, governed programmes, developing project plans, RAID logs, governance forums and readiness activities from the ground up rather than administering plans already in place.</p></div>
+      <div class="why-card reveal"><h3>Credible with senior Finance and Actuarial stakeholders</h3><p>Peter's programmes have required him to operate confidently with Board Committees, senior executives and outsource service providers such as Aviva and LV, translating complex regulatory and actuarial requirements into clear delivery decisions.</p></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- EXPERIENCE -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label reveal">Track Record</div>
+    <h2 class="section-title reveal">Regulatory and Finance change delivery in practice</h2>
+    <p class="section-sub reveal">Three engagements chosen for their direct relevance to a Finance regulatory Project Manager mandate at Standard Life.</p>
+
+    <div class="tool-case reveal">
+      <div class="tool-header">
+        <div class="tool-header-left">
+          <span class="tool-num">01</span>
+          <div><h3>Standard Life Actuarial Systems Migration</h3><p class="tagline">Project Manager, Phoenix Group PLC</p></div>
+        </div>
+        <div class="badges"><span class="badge">£140bn Funds Migrated</span><span class="badge">Actuarial Systems</span><span class="badge">Board-Level Reporting</span></div>
+      </div>
+      <div class="tool-body">
+        <ul class="col-list">
+          <li>Led the migration of Standard Life With Profit and Non Profit funds, totalling £140bn under administration, onto Phoenix actuarial systems</li>
+          <li>Managed full project lifecycle delivery across teams based in Wythall, Edinburgh, London, Ireland and Germany, liaising directly with senior Phoenix executives and Board Committees on status, risks and governance decisions</li>
+          <li>Directed third-party delivery of actuarial systems model changes and led analysis of end-to-end business processes to ensure no impact on the working day timetable for quarterly valuations</li>
+        </ul>
+        <div class="relevance-note"><strong>Relevance:</strong> direct, evidenced experience of the Standard Life and Phoenix actuarial and funds environment, at Board-reporting level.</div>
+      </div>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-header">
+        <div class="tool-header-left">
+          <span class="tool-num">02</span>
+          <div><h3>Pensions Dashboard Regulatory Programme</h3><p class="tagline">Project Manager, ReAssure (Phoenix Group PLC)</p></div>
+        </div>
+        <div class="badges"><span class="badge">FCA / TPR Regulatory</span><span class="badge">Cloud Data Delivery</span><span class="badge">Multi-Party Coordination</span></div>
+      </div>
+      <div class="tool-body">
+        <ul class="col-list">
+          <li>Delivered multiple projects on the major Pensions Dashboard regulatory programme, developing and delivering a cloud-based data extract from internal IT architecture into a third-party-hosted data store</li>
+          <li>Worked with outsource service providers, including Aviva and LV, to ensure regulatory compliance across the delivery chain</li>
+          <li>Delivered business readiness for Customer Service teams, reviewing and amending operational processes to support the regulatory IT deliverables</li>
+        </ul>
+        <div class="relevance-note"><strong>Relevance:</strong> demonstrates regulatory programme delivery across multiple stakeholders and third parties, mirroring the cross-workstream coordination a Finance regulatory PM requires.</div>
+      </div>
+    </div>
+
+    <div class="tool-case reveal">
+      <div class="tool-header">
+        <div class="tool-header-left">
+          <span class="tool-num">03</span>
+          <div><h3>FCA Legacy Review & Pensions Reform Delivery</h3><p class="tagline">Programme Manager, ReAssure</p></div>
+        </div>
+        <div class="badges"><span class="badge">Full Lifecycle Ownership</span><span class="badge">Cross-Function Delivery</span></div>
+      </div>
+      <div class="tool-body">
+        <ul class="col-list">
+          <li>Delivered the FG 16/8 Fair Treatment of Long-Standing Customers programme, a large-scale FCA compliance initiative reviewing legacy product customer journeys and identifying changes to improve customer outcomes</li>
+          <li>Managed workstreams spanning Actuarial, Product Governance, IT, Change Management, Business Analysis, Customer Services, Software Testing and Marketing</li>
+          <li>Delivered a further large programme of system and process change enabling customers to take advantage of Pensions Flexibility, ensuring compliance with UK Pension Reforms</li>
+        </ul>
+        <div class="relevance-note"><strong>Relevance:</strong> end-to-end ownership of complex, multi-workstream regulatory programmes, from planning through to delivery and business readiness.</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- LOGO TICKER -->
+<section class="logo-ticker-section">
+  <div class="container">
+    <div class="section-label reveal" style="text-align:center;">Companies & Institutions</div>
+  </div>
+  <div class="ticker-wrap reveal">
+    <div class="ticker-track">
+      <div class="ticker-item logo-card"><img src="LOGO_STANDARDLIFE.png" alt="Standard Life" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Standard Life</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_PHOENIXGROUP.png" alt="Phoenix Group" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Phoenix Group</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_REASSURE.png" alt="ReAssure" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">ReAssure</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_AVIVA.png" alt="Aviva" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Aviva</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_ARDONAGH.png" alt="The Ardonagh Group" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">The Ardonagh Group</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_PREMIUMCREDIT.png" alt="Premium Credit" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Premium Credit</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_UNITYTRUSTBANK.png" alt="Unity Trust Bank" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Unity Trust Bank</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_IKANOBANK.png" alt="Ikano Bank" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Ikano Bank</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_MILLWARDBROWN.png" alt="Millward Brown" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Millward Brown</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_EXPERIAN.png" alt="Experian" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Experian</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_BNPPARIBAS.png" alt="BNP Paribas Personal Finance" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">BNP Paribas Personal Finance</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_SCHWAB.png" alt="Charles Schwab" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Charles Schwab</span></div>
+      <!-- duplicate set for seamless loop -->
+      <div class="ticker-item logo-card"><img src="LOGO_STANDARDLIFE.png" alt="Standard Life" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Standard Life</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_PHOENIXGROUP.png" alt="Phoenix Group" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Phoenix Group</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_REASSURE.png" alt="ReAssure" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">ReAssure</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_AVIVA.png" alt="Aviva" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Aviva</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_ARDONAGH.png" alt="The Ardonagh Group" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">The Ardonagh Group</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_PREMIUMCREDIT.png" alt="Premium Credit" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Premium Credit</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_UNITYTRUSTBANK.png" alt="Unity Trust Bank" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Unity Trust Bank</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_IKANOBANK.png" alt="Ikano Bank" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Ikano Bank</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_MILLWARDBROWN.png" alt="Millward Brown" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Millward Brown</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_EXPERIAN.png" alt="Experian" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Experian</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_BNPPARIBAS.png" alt="BNP Paribas Personal Finance" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">BNP Paribas Personal Finance</span></div>
+      <div class="ticker-item logo-card"><img src="LOGO_SCHWAB.png" alt="Charles Schwab" onerror="this.style.display='none';this.nextElementSibling.style.display='inline'"><span class="ticker-fallback">Charles Schwab</span></div>
+    </div>
+  </div>
+</section>
+
+<div class="divider container"></div>
+
+<!-- FOOTER -->
+<footer id="contact">
+  <div class="container">
+    <div class="f-name">Peter Cassidy</div>
+    <div class="f-links">
+      <a href="https://www.linkedin.com/in/peterjcassidy/" target="_blank" rel="noopener">LinkedIn</a>
+    </div>
+    <div class="copyright">© 2026 Peter Cassidy · Profile prepared by <a href="https://www.transformtogether.co.uk/" target="_blank" rel="noopener" class="footer-tt-link">Transform Together</a></div>
+  </div>
+</footer>
+
+<button class="back-to-top" id="backToTop">↑</button>
+
+<script>
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+    }, { threshold: 0.15 });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('visible'));
+  }
+
+  const sections = document.querySelectorAll('section[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(sec => { if (window.scrollY >= sec.offsetTop - 140) current = sec.getAttribute('id'); });
+    navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+    const btt = document.getElementById('backToTop');
+    if (window.scrollY > 400) btt.classList.add('show'); else btt.classList.remove('show');
+  });
+
+  const hamburgerBtn = document.getElementById('hamburgerBtn');
+  const drawer = document.getElementById('mobileDrawer');
+  const drawerClose = document.getElementById('drawerClose');
+  function openDrawer(){ drawer.classList.add('open'); document.body.style.overflow='hidden'; }
+  function closeDrawer(){ drawer.classList.remove('open'); document.body.style.overflow=''; }
+  hamburgerBtn.addEventListener('click', openDrawer);
+  drawerClose.addEventListener('click', closeDrawer);
+  drawer.querySelectorAll('a').forEach(a => a.addEventListener('click', closeDrawer));
+
+  document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({top:0, behavior:'smooth'}));
+</script>
+</body>
+</html>
